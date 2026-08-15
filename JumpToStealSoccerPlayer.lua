@@ -220,7 +220,7 @@ local function BuySelectedUpgrades()
         elseif Upgrade == "Carry" then
             BuyCarryUpgrade()
         end
-        RunService.RenderStepped:Wait(0.5)
+        RunService.RenderStepped:Wait(0.1)
     end
 end
 
@@ -398,10 +398,10 @@ for _, Preset in FontPresets do
     table.insert(FontPresetNames, Preset.Name)
 end
 
--- Soccer slot options (Slot 1 .. Slot 70)
+-- Soccer slot options (Soccer 1 .. Soccer 70)
 local SoccerSlotOptions = {}
 for i = 1, 70 do
-    table.insert(SoccerSlotOptions, "Slot " .. i)
+    table.insert(SoccerSlotOptions, "Soccer " .. i)
 end
 
 -- CONFIG SAVE / LOAD (named configs)
@@ -791,7 +791,7 @@ local Window = Library:CreateWindow({
     Footer = {
         { Text = Config.DiscordLink, Copyable = true },
         { Text = " | " },
-        { Text = "AntiGodHub" },
+        { Text = "AntiGodHub", Copyable = true },
     },
     CornerRadius = 20,
     AutoShow = true,
@@ -844,8 +844,8 @@ local MainTabs = {
 -- INFO TAB
 local StatusBox = Tabs.Info:AddLeftGroupbox("Status", "user")
 
-StatusBox:AddLabel({ Text = 'User - <font color="#60d888">' .. Player.Name .. '</font>' })
-StatusBox:AddLabel({ Text = 'Status - <font color="#60d888">Keyless</font>' })
+StatusBox:AddLabel({ Text = 'USER - <font color="#60d888">' .. Player.Name .. '</font>' })
+StatusBox:AddLabel({ Text = 'STATUS - <font color="#60d888">Keyless</font>' })
 
 -- Executor name + version (simple: Executor - Delta 1.1.733.988)
 local ExecutorName = "Unknown"
@@ -880,15 +880,15 @@ local ExecutorDisplay = ExecutorName
 if ExecutorVersion ~= "Unknown" and ExecutorVersion ~= "" then
     ExecutorDisplay = ExecutorName .. " " .. ExecutorVersion
 end
-StatusBox:AddLabel({ Text = 'Executor - <font color="#60d888">' .. ExecutorDisplay .. '</font>' })
+StatusBox:AddLabel({ Text = 'EXECUTOR - <font color="#60d888">' .. ExecutorDisplay .. '</font>' })
 StatusBox:AddDivider()
 local SessionLabel = StatusBox:AddLabel({ Text = 'Session - <font color="#60d888">0m 0s</font>' })
 
 -- Updates Box (below Status)
 local UpdatesBox = Tabs.Info:AddLeftGroupbox("Updates", "rotate-ccw")
 
-UpdatesBox:AddLabel({ Text = '<font color="#60d888">● Up to date</font>' })
-UpdatesBox:AddLabel({ Text = 'v5.7 <font color="#8a8a8a">· Last updated Aug 2026</font>' })
+UpdatesBox:AddLabel({ Text = '<font color="#60d888">● Up To Date</font>' })
+UpdatesBox:AddLabel({ Text = '<font color="#8a8a8a">· Last Updated 8/15/2026</font>' })
 
 -- Game Info Box
 local InfoGameBox = Tabs.Info:AddRightGroupbox("Game Info", "gamepad-2")
@@ -899,7 +899,7 @@ InfoGameBox:AddLabel({ Text = 'Place ID - <font color="' .. Green .. '">' .. tos
 
 local JobId = tostring(game.JobId)
 local ShortJobId = #JobId > 18 and JobId:sub(1, 18) .. "..." or JobId
-InfoGameBox:AddLabel({ Text = 'Server - <font color="' .. Green .. '">' .. ShortJobId .. '</font>' })
+InfoGameBox:AddLabel({ Text = 'SERVER - <font color="' .. Green .. '">' .. ShortJobId .. '</font>' })
 
 -- Fetch game name (async, wrapped in pcall)
 task.spawn(function()
@@ -910,11 +910,11 @@ task.spawn(function()
         pcall(function()
             -- strip emojis so the full name fits in the card
             local CleanName = tostring(Info.Name):gsub("[^%z\1-\127]", "")
-            GameNameLabel:SetText('Game - <font color="#60d888">' .. CleanName .. ' [' .. game.PlaceId .. ']</font>')
+            GameNameLabel:SetText('GAME - <font color="#60d888">' .. CleanName .. ' [' .. game.PlaceId .. ']</font>')
         end)
     else
         pcall(function()
-            GameNameLabel:SetText('Game - <font color="#60d888">Unknown</font>')
+            GameNameLabel:SetText('GAME - <font color="#60d888">Unknown</font>')
         end)
     end
 end)
@@ -927,7 +927,7 @@ task.spawn(function()
         local Mins = math.floor(Elapsed / 60)
         local Secs = math.floor(Elapsed % 60)
         pcall(function()
-            SessionLabel:SetText('Session - <font color="#60d888">' .. Mins .. 'm ' .. Secs .. 's</font>')
+            SessionLabel:SetText('SESSION - <font color="#60d888">' .. Mins .. 'm ' .. Secs .. 's</font>')
         end)
         task.wait(1)
     end
@@ -1006,8 +1006,8 @@ FeaturesBox:AddLabel({ Text = '<font color="#60d888">Auto Hide UI / Anti AFK / N
 local FarmBox = MainTabs.Eggs:AddLeftGroupbox("Auto Farm", "drill")
 
 AddFeatureToggle(FarmBox, "AutoFarm", {
-    Text = "Auto Farm Loop",
-    Tooltip = "Continuously farm OG Lucky Block",
+    Text = "Auto Farm OG",
+    Tooltip = "farm OG Lucky Block",
     Notify = true,
 }, function(Value)
     Config.FarmActive = Value
@@ -1023,14 +1023,14 @@ end)
 
 AddFeatureToggle(FarmBox, "AutoCollect", {
     Text = "Auto Collect Cash",
-    Tooltip = "Auto collect earnings from 50 slots every cycle",
+    Tooltip = "Auto collect earnings from 70 slots every cycle",
     Notify = true,
 }, function(Value)
     Config.CollectActive = Value
     if Value then
         task.spawn(function()
             while Config.CollectActive do
-                CollectEarnings(50)
+                CollectEarnings(70)
                 RunService.RenderStepped:Wait(180)
             end
         end)
@@ -1071,14 +1071,14 @@ end)
 
 AddFeatureToggle(FarmBox, "AutoOpen", {
     Text = "Auto Open Lucky Blocks",
-    Tooltip = "Auto open 50 lucky blocks every cycle",
+    Tooltip = "Auto open 70 lucky blocks every cycle",
     Notify = true,
 }, function(Value)
     Config.OpenActive = Value
     if Value then
         task.spawn(function()
             while Config.OpenActive do
-                OpenLuckyBlocks(50)
+                OpenLuckyBlocks(70)
                 RunService.RenderStepped:Wait(180)
             end
         end)
@@ -1090,9 +1090,9 @@ local QuickBox = MainTabs.Eggs:AddRightGroupbox("Quick Actions", "zap")
 QuickBox:AddButton({
     Text = "Collect Cash",
     Func = function()
-        CollectEarnings(50)
+        CollectEarnings(70)
     end,
-    Tooltip = "Collect earnings from 50 slots"
+    Tooltip = "Collect earnings from 70 slots"
 })
 
 QuickBox:AddButton({
@@ -1114,9 +1114,9 @@ QuickBox:AddButton({
 QuickBox:AddButton({
     Text = "Open Lucky Blocks",
     Func = function()
-        OpenLuckyBlocks(50)
+        OpenLuckyBlocks(70)
     end,
-    Tooltip = "Open 50 lucky blocks one time"
+    Tooltip = "Open 70 lucky blocks one time"
 })
 
 -- MAIN > UPGRADE TAB
@@ -1176,8 +1176,28 @@ end)
 
 local FloorsSoccerBox = MainTabs.Slimes:AddRightGroupbox("Floors & Soccer", "zap")
 
+local SoccerSlotDropdown = FloorsSoccerBox:AddDropdown("SoccerSlot", {
+    Text = "Soccer List (multi-select)",
+    Values = SoccerSlotOptions,
+    Multi = true,
+    Default = Config.SoccerSlots,
+    MaxVisibleDropdownItems = 8,
+    Callback = function(Selected)
+        Config.SoccerSlots = {}
+        for Slot, Active in Selected do
+            if Active then
+                table.insert(Config.SoccerSlots, Slot)
+            end
+        end
+        ScheduleSave()
+    end,
+})
+SettingsRefs.SoccerSlotDropdown = SoccerSlotDropdown
+
+FloorsSoccerBox:AddDivider()
+
 AddFeatureToggle(FloorsSoccerBox, "AutoSoccer", {
-    Text = "Auto Upgrade Soccer",
+    Text = "Auto Upgrade Seleceted Soccer",
     Tooltip = "Auto upgrade all selected soccer slots every cycle",
     Notify = true,
 }, function(Value)
@@ -1194,26 +1214,6 @@ AddFeatureToggle(FloorsSoccerBox, "AutoSoccer", {
         end)
     end
 end)
-
-FloorsSoccerBox:AddDivider()
-
-local SoccerSlotDropdown = FloorsSoccerBox:AddDropdown("SoccerSlot", {
-    Text = "Slot (multi-select)",
-    Values = SoccerSlotOptions,
-    Multi = true,
-    Default = Config.SoccerSlots,
-    MaxVisibleDropdownItems = 8,
-    Callback = function(Selected)
-        Config.SoccerSlots = {}
-        for Slot, Active in Selected do
-            if Active then
-                table.insert(Config.SoccerSlots, Slot)
-            end
-        end
-        ScheduleSave()
-    end,
-})
-SettingsRefs.SoccerSlotDropdown = SoccerSlotDropdown
 
 FloorsSoccerBox:AddDivider()
 
@@ -1281,7 +1281,7 @@ AddFeatureToggle(GearBox, "AutoBuyGear", {
 end)
 
 AddFeatureToggle(GearBox, "AutoBuyAllGear", {
-    Text = "Auto Buy All Gear (1-25)",
+    Text = "Auto Buy All Gear",
     Tooltip = "Auto buy all 25 gears every cycle",
     Notify = true,
 }, function(Value)
