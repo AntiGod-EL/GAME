@@ -160,7 +160,7 @@ tab1:AddToggle({
 				task.wait()
 				CatchFish()
 			end)
-			task.wait(0.3)
+			task.wait(0.7)
 		end
 	end
 })
@@ -176,7 +176,7 @@ tab1:AddToggle({
 				task.wait()
 				CatchFish()
 			end)
-			task.wait(0.3)
+			task.wait(0.7)
 		end
 	end
 })
