@@ -117,7 +117,7 @@ local function ThrowLineNormal()
 			character = Character,
 			beam = Beam,
 			rope = Rope,
-			currentLuck = 1,
+			currentLuck = 3,
 			bobberName = "Red Bait",
 			isWater = true
 		}
@@ -160,7 +160,7 @@ tab1:AddToggle({
 				task.wait()
 				CatchFish()
 			end)
-			task.wait(0.5)
+			task.wait(0.2)
 		end
 	end
 })
@@ -176,7 +176,7 @@ tab1:AddToggle({
 				task.wait()
 				CatchFish()
 			end)
-			task.wait(0.5)
+			task.wait(0.2)
 		end
 	end
 })
