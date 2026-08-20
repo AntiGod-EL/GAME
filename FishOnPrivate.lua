@@ -157,10 +157,10 @@ tab1:AddToggle({
 		while getgenv().AutoFishSecret do
 			pcall(function()
 				ThrowLineSecret()
-				task.wait(0.3)
+				task.wait(0.1)
 				CatchFish()
 			end)
-			task.wait(1)
+			task.wait(1.2)
 		end
 	end
 })
@@ -173,10 +173,10 @@ tab1:AddToggle({
 		while getgenv().AutoFishNormal do
 			pcall(function()
 				ThrowLineNormal()
-				task.wait(0.3)
+				task.wait(0.1)
 				CatchFish()
 			end)
-			task.wait(1)
+			task.wait(1.2)
 		end
 	end
 })
