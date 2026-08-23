@@ -176,7 +176,7 @@ tab1:AddToggle({
 			pcall(function()
 				KnitRE.ChestService.RF.ClaimDailyChest:InvokeServer()
 			end)
-			task.wait(0.0000001)
+			task.wait(1)
 		end
 	end
 })
