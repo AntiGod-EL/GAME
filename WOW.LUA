@@ -13,10 +13,6 @@ local Config = {
     NoGameplayPaused = true
 }
 
-ProximityPromptService.PromptButtonHoldBegan:Connect(function(prompt)
-    fireproximityprompt(prompt)
-end)
-
 local ActiveLoops = {}
 
 local function RunLoop(name, flagCheck, interval, fn)
@@ -205,7 +201,7 @@ eggFolder:AddToggle({
     callback = function(v)
         getgenv().HatchNormalEgg = v
         RunLoop("HatchNormalEgg", function() return getgenv().HatchNormalEgg end, 0.00001, function()
-            KnitRE.EggHatchService.RE.Hatch:FireServer("Egg_4_3", 3)
+            KnitRE.EggHatchService.RE.Hatch:FireServer("Egg_4_3", 10)
         end)
     end
 })
@@ -216,7 +212,7 @@ eggFolder:AddToggle({
     callback = function(v)
         getgenv().HatchChristmasEgg = v
         RunLoop("HatchChristmasEgg", function() return getgenv().HatchChristmasEgg end, 0.00001, function()
-            KnitRE.EggHatchService.RE.Hatch:FireServer("Egg_Christmas", 3)
+            KnitRE.EggHatchService.RE.Hatch:FireServer("Egg_Christmas", 10)
         end)
     end
 })
