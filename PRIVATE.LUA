@@ -79,14 +79,14 @@ GameplayPausedLoop()
 -- ============================================
 -- WINDOW 1: Main
 -- ============================================
-local tab1 = library:CreateWindow("AntiGodHub")
+local tab1 = library:CreateWindow("Auto Farm")
 
 -- Auto Farm Wins
 local WinGate = "WinGate_16"
 local WinPosition = Vector3.new(1801.7867431641, 782.15179443359, -689403.9375)
 
 tab1:AddToggle({
-	text = "Auto Farm Wins [IN RACE]",
+	text = "Auto Farm Wins",
 	flag = "auto_farm_wins",
 	callback = function(v)
 		getgenv().AutoFarmWins = v
@@ -94,7 +94,22 @@ tab1:AddToggle({
 			pcall(function()
 				KnitRE.FightService.RE.GetWinsEvent:FireServer(WinGate, WinPosition)
 			end)
-			task.wait(0.000000001)
+			task.wait(0.00000001)
+		end
+	end
+})
+
+-- Inf Wins
+tab1:AddToggle({
+	text = "Inf Wins",
+	flag = "inf_wins",
+	callback = function(v)
+		getgenv().InfWins = v
+		while getgenv().InfWins do
+			pcall(function()
+				KnitRE.RandomPotionService.RE.BuyPotionEvent:FireServer(-7e+71, {}, true, "yippie!")
+			end)
+			task.wait(0.000001)
 		end
 	end
 })
@@ -146,7 +161,7 @@ tab1:AddToggle({
 			pcall(function()
 				KnitRE.PetService.RE.EnlargeAllPets:FireServer()
 			end)
-			task.wait(0.5)
+			task.wait(0.001)
 		end
 	end
 })
@@ -161,14 +176,14 @@ tab1:AddToggle({
 			pcall(function()
 				KnitRE.PetService.RE.EquipBestPets:FireServer()
 			end)
-			task.wait(1)
+			task.wait(0.001)
 		end
 	end
 })
 
 -- Dupe Pets
 tab1:AddToggle({
-	text = "Dupe Pets [OP]",
+	text = "Dupe Pets",
 	flag = "dupe_pets",
 	callback = function(v)
 		getgenv().DupePets = v
@@ -176,14 +191,14 @@ tab1:AddToggle({
 			pcall(function()
 				KnitRE.ChestService.RF.ClaimDailyChest:InvokeServer()
 			end)
-			task.wait(0.003)
+			task.wait(0.00000000001)
 		end
 	end
 })
 
 -- Auto Claim Event Egg
 tab1:AddToggle({
-	text = "Auto Claim Quest Egg",
+	text = "Auto Claim Event Egg",
 	flag = "auto_claim_egg",
 	callback = function(v)
 		getgenv().AutoClaimEgg = v
@@ -191,11 +206,48 @@ tab1:AddToggle({
 			pcall(function()
 				KnitRE.OnlineRewardService.RF.ClaimOnlineQuestReward:InvokeServer()
 			end)
-			task.wait(1)
+			task.wait(0.001)
 		end
 	end
 })
 
-tab1:AddLabel({text = "PRIVATE SCRIPT"})
+tab1:AddLabel({text = "YouTube - AntiGodHub"})
+
+-- ============================================
+-- WINDOW 2: Egg Hatch
+-- ============================================
+local tab2 = library:CreateWindow("Egg Hatch")
+
+-- Hatch Normal Egg [13M]
+tab2:AddToggle({
+	text = "Hatch Normal Egg [13M]",
+	flag = "hatch_normal_egg",
+	callback = function(v)
+		getgenv().HatchNormalEgg = v
+		while getgenv().HatchNormalEgg do
+			pcall(function()
+				KnitRE.EggHatchService.RE.Hatch:FireServer("Egg_2_4", 1)
+			end)
+			task.wait(0.001)
+		end
+	end
+})
+
+-- Hatch Christmas Egg [150]
+tab2:AddToggle({
+	text = "Hatch Christmas Egg [150]",
+	flag = "hatch_christmas_egg",
+	callback = function(v)
+		getgenv().HatchChristmasEgg = v
+		while getgenv().HatchChristmasEgg do
+			pcall(function()
+				KnitRE.EggHatchService.RE.Hatch:FireServer("Egg_Christmas", 1)
+			end)
+			task.wait(0.001)
+		end
+	end
+})
+
+tab2:AddLabel({text = "YouTube - LuaU"})
 
 library:Init()
