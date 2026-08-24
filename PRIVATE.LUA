@@ -109,7 +109,7 @@ tab1:AddToggle({
 			pcall(function()
 				KnitRE.RandomPotionService.RE.BuyPotionEvent:FireServer(-7e+71, {}, true, "yippie!")
 			end)
-			task.wait(0.000001)
+			task.wait(0.000000001)
 		end
 	end
 })
@@ -123,6 +123,21 @@ tab1:AddToggle({
 		while getgenv().AutoRebirth do
 			pcall(function()
 				KnitRE.RebirthService.RF.Rebirth:InvokeServer()
+			end)
+			task.wait(0.00001)
+		end
+	end
+})
+
+-- Auto Super Rebirth
+tab1:AddToggle({
+	text = "Auto Super Rebirth",
+	flag = "auto_super_rebirth",
+	callback = function(v)
+		getgenv().AutoSuperRebirth = v
+		while getgenv().AutoSuperRebirth do
+			pcall(function()
+				KnitRE.RebirthService.RF.SuperRebirth:InvokeServer()
 			end)
 			task.wait(0.001)
 		end
@@ -176,7 +191,7 @@ tab1:AddToggle({
 			pcall(function()
 				KnitRE.PetService.RE.EquipBestPets:FireServer()
 			end)
-			task.wait(0.001)
+			task.wait(2)
 		end
 	end
 })
@@ -191,7 +206,7 @@ tab1:AddToggle({
 			pcall(function()
 				KnitRE.ChestService.RF.ClaimDailyChest:InvokeServer()
 			end)
-			task.wait(0.00000000001)
+			task.wait(0.000000000001)
 		end
 	end
 })
@@ -228,7 +243,7 @@ tab2:AddToggle({
 			pcall(function()
 				KnitRE.EggHatchService.RE.Hatch:FireServer("Egg_2_4", 1)
 			end)
-			task.wait(0.001)
+			task.wait(0.0001)
 		end
 	end
 })
@@ -243,10 +258,9 @@ tab2:AddToggle({
 			pcall(function()
 				KnitRE.EggHatchService.RE.Hatch:FireServer("Egg_Christmas", 1)
 			end)
-			task.wait(0.001)
+			task.wait(0.0001)
 		end
 	end
 })
-
 
 library:Init()
