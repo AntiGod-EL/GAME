@@ -7,6 +7,7 @@ local Player = Players.LocalPlayer
 
 -- Events
 local ClickStartEvent = game:GetService("ReplicatedStorage").Shared.Packages.Network.rev_ClickStart
+local ClickStopEvent = game:GetService("ReplicatedStorage").Shared.Packages.Network.rev_ClickStop
 local X2ClaimEvent = game:GetService("ReplicatedStorage").Shared.Packages.Network.rev_X2Claim
 local RebirthEvent = game:GetService("ReplicatedStorage").Shared.Packages.Network.rev_RebirthRequest
 local SellAllEvent = game:GetService("ReplicatedStorage").Shared.Packages.Network.rev_SellAll
@@ -56,7 +57,7 @@ AntiAfkLoop()
 local tab1 = library:CreateWindow("PRIVATE")
 
 tab1:AddToggle({
-	text = "Farm Level Fast",
+	text = "Farm Level [FAST]",
 	flag = "auto_farm",
 	callback = function(v)
 		getgenv().AutoFarm = v
@@ -64,11 +65,15 @@ tab1:AddToggle({
 			pcall(function()
 				ClickStartEvent:FireServer()
 			end)
-			task.wait(0.00000000001)
+			task.wait(0.00001)
+			pcall(function()
+				ClickStopEvent:FireServer()
+			end)
+			task.wait(0.00001)
 			pcall(function()
 				X2ClaimEvent:FireServer()
 			end)
-			task.wait(0.2)
+			task.wait(0.1)
 		end
 	end
 })
@@ -82,7 +87,7 @@ tab1:AddToggle({
 			pcall(function()
 				RebirthEvent:FireServer()
 			end)
-			task.wait(0.5)
+			task.wait(0.1)
 		end
 	end
 })
@@ -96,21 +101,21 @@ tab1:AddToggle({
 			pcall(function()
 				SellAllEvent:FireServer()
 			end)
-			task.wait(0.2)
+			task.wait(0.1)
 		end
 	end
 })
 
 tab1:AddToggle({
-	text = "Buy Upgrade",
+	text = "Auto Buy Upgrade",
 	flag = "auto_buy_upgrade",
 	callback = function(v)
 		getgenv().AutoBuyUpgrade = v
 		while getgenv().AutoBuyUpgrade do
 			pcall(function()
-				BuyUpgradeEvent:FireServer("ExpPerClick", 1)
+				BuyUpgradeEvent:FireServer("ExpPerClick", 5)
 			end)
-			task.wait(0.001)
+			task.wait(0.00001)
 		end
 	end
 })
