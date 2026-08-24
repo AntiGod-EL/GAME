@@ -248,6 +248,5 @@ tab2:AddToggle({
 	end
 })
 
-tab2:AddLabel({text = "YouTube - LuaU"})
 
 library:Init()
