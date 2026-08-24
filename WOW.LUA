@@ -201,7 +201,7 @@ eggFolder:AddToggle({
     callback = function(v)
         getgenv().HatchNormalEgg = v
         RunLoop("HatchNormalEgg", function() return getgenv().HatchNormalEgg end, 0.00001, function()
-            KnitRE.EggHatchService.RE.Hatch:FireServer("Egg_4_3", 10)
+            KnitRE.EggHatchService.RE.Hatch:FireServer("Egg_4_3", 6)
         end)
     end
 })
@@ -212,7 +212,7 @@ eggFolder:AddToggle({
     callback = function(v)
         getgenv().HatchChristmasEgg = v
         RunLoop("HatchChristmasEgg", function() return getgenv().HatchChristmasEgg end, 0.00001, function()
-            KnitRE.EggHatchService.RE.Hatch:FireServer("Egg_Christmas", 10)
+            KnitRE.EggHatchService.RE.Hatch:FireServer("Egg_Christmas", 6)
         end)
     end
 })
